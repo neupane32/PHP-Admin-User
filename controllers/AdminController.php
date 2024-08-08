@@ -18,6 +18,7 @@ class AdminController {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
+            //Authenticate User
             $result = $this->adminModel->login($username, $password);
 
             if (isset($result['error'])) {
