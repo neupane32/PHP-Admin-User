@@ -12,13 +12,11 @@ class AdminModel {
         $query = "SELECT * FROM " . $this->table . " WHERE username = ? AND password = ?";
         $stmt = $this->conn->prepare($query);
 
-        // Check if prepare() failed
         if ($stmt === false) {
             return ["error" => "Failed to prepare SQL statement: " . $this->conn->error];
         }
-
         // Bind parameters
-        $password_md5 = md5($password); // Hash the password
+        $password_md5 = md5($password);
         $stmt->bind_param('ss', $username, $password_md5);
         $stmt->execute();
 
