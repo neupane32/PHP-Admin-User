@@ -10,7 +10,7 @@ class UserController {
     }
 
     public function index() {
-        $users = $this->userModel->getAll();
+        $users = $this->userModel->getAll(); 
         include 'views/dashboard.php';
     }
 
