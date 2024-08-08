@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../config/Database.php';
 require_once '../models/AdminModel.php';
+require_once '../config/Database.php';
 
 class AdminController {
     private $db;
@@ -18,10 +18,12 @@ class AdminController {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $admin = $this->adminModel->login($username, $password);
+            $result = $this->adminModel->login($username, $password);
 
-            if ($admin) {
-                $_SESSION['admin'] = $admin;
+            if (isset($result['error'])) {
+                echo $result['error'];
+            } elseif ($result) {
+                $_SESSION['admin'] = $result;
                 header("Location: /views/dashboard.php");
             } else {
                 echo "Invalid credentials.";
